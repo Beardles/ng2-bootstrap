@@ -1,5 +1,5 @@
 import {it, beforeEach, inject, async} from '@angular/core/testing';
-import { TestComponentBuilder, ComponentFixture } from '@angular/core/testing';
+import { TestComponentBuilder, ComponentFixture } from '@angular/compiler/testing';
 import {AlertComponent} from './alert.component';
 
 describe('Component: Alert', () => {

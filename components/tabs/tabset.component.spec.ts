@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {/*addProviders, */inject, async} from '@angular/core/testing';
-import {TestComponentBuilder, ComponentFixture} from '@angular/core/testing';
+import {TestComponentBuilder, ComponentFixture} from '@angular/compiler/testing';
 import {TabsetComponent} from './tabset.component';
 import {TabDirective} from './tab.directive';
 import {TabHeadingDirective} from './tab-heading.directive';
