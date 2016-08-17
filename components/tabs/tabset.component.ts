@@ -10,7 +10,7 @@ import {TabDirective} from './tab.directive';
   template: `
     <ul class="nav" [ngClass]="classMap" (click)="$event.preventDefault()">
         <li *ngFor="let tabz of tabs" class="nav-item"
-          [class.active]="tabz.active" [class.disabled]="tabz.disabled">
+          [class.active]="tabz.active" [class.disabled]="tabz.disabled" [ngStyle]="getTabStyle(tabz.active)">
           <a href class="nav-link"
             [class.active]="tabz.active" [class.disabled]="tabz.disabled"
             (click)="tabz.active = true">
@@ -36,6 +36,12 @@ export class TabsetComponent implements OnInit, OnDestroy {
   @Input()
   public get type():string {return this._type;};
 
+  @Input()
+  public get tabStyle():any { return this._tabStyle;};
+
+  @Input()
+  public get tabActiveStyle():any { return this._tabActiveStyle;};
+
   @HostBinding('class.tab-container') protected clazz:boolean = true;
 
   public set vertical(value:boolean) {
@@ -48,6 +54,14 @@ export class TabsetComponent implements OnInit, OnDestroy {
     this.setClassMap();
   }
 
+  public set tabStyle(value:any) {
+    this._tabStyle = value;
+  }
+
+  public set tabActiveStyle(value:any) {
+    this._tabActiveStyle = value;
+  }
+
   public set type(value:string) {
     this._type = value;
     this.setClassMap();
@@ -58,6 +72,8 @@ export class TabsetComponent implements OnInit, OnDestroy {
   private isDestroyed:boolean;
   private _vertical:boolean;
   private _justified:boolean;
+  private _tabStyle:any = {};
+  private _tabActiveStyle:any = {};
   private _type:string;
   private classMap:any = {};
 
@@ -72,6 +88,10 @@ export class TabsetComponent implements OnInit, OnDestroy {
   public addTab(tab:TabDirective):void {
     this.tabs.push(tab);
     tab.active = this.tabs.length === 1 && tab.active !== false;
+  }
+
+  public getTabStyle(active:boolean):any {
+    return active ? this.tabActiveStyle : this.tabStyle;
   }
 
   public removeTab(tab:TabDirective):void {
